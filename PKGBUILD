@@ -6,14 +6,15 @@ pkgdesc="This hook provides dynamic dns capabilities to the initramfs. It is mea
 arch=('any')
 url="https://github.com/grazzolini/mkinitcpio-ddns"
 license=('BSD')
-depends=('dropbear_initrd_encrypt', 'inadyn-mt')
+depends=('inadyn-mt')
+optdepends=('dropbear_initrd_encrypt: for setting a gateway using ip= parameter' 'mkinitcpio-ppp: dial to a provider to establish internet connection')
 install=$pkgname.install
 source=('ChangeLog' "$pkgname.install" 'ddns_hook' 'ddns_install')
 changelog='ChangeLog'
 sha256sums=('6663f33155b4640f113539562fc7381583ae0e42ff680ee9425eae9ecd2dd7d0'
-            '16c2ec0c45e3946e4310bd6ba96438630675efb53ab092540da7c287d3686a57'
-            '256e89fab59da0d83dcb35e26041dbe9ee563989cf7c34a5b90be664d1cc5f1d'
-            '896caa4bec27ebb4e1ca834dc6f5e7161c8030d7714091e0d8953826a64450a8')
+            'f967435d494ec9d4980df1bfd6f3ca6738ebd0e2544c4e079ce31603dea5b7f6'
+            'dcfb9d012d832337892c8955db4c7039bbac9df75c98218ffc029513feb66f26'
+            '011a2d4b3fd28eb16a74300bbeda158b7d60d64c3ee4e13a3ae8dbb03cd234dd')
 
 package() {
   install -Dm644 "$srcdir/ddns_hook"      "$pkgdir/usr/lib/initcpio/hooks/ddns"
