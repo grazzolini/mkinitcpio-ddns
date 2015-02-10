@@ -1,0 +1,22 @@
+#!/bin/bash
+
+post_install() {
+    cat<<INSTALLEOF
+    This hook install and run the inadyn-mt ddns updater, to dinamically update
+    a dns name with the supported dynamic dns providers. It assume that the
+    configuration is in "/etc/inadyn-mt.conf". You should use the background option
+    to make inadyn-mt become a daemon. After that, you just need to put the ddns
+    hook in the "/etc/mkinitcpio.conf" file and rebuild the initramfs.
+INSTALLEOF
+}
+
+post_remove() {
+    cat<<REMOVEEOF
+    Remove the "ddns" from the "HOOKS" section in "/etc/mkinitcpio.conf", then 
+    rebuild the initramfs with ("mkinitcpio -p linux").
+REMOVEEOF
+}
+
+post_upgrade() {
+    post_install
+}

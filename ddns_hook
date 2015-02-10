@@ -1,0 +1,12 @@
+#!/usr/bin/ash
+
+run_hook ()
+{
+    echo "Starting inadyn-mt"
+    inadyn-mt
+}
+
+run_cleanuphook ()
+{
+    killall inadyn-mt
+}

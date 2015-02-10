@@ -1,0 +1,33 @@
+#!/bin/bash
+build ()
+{
+  # Are we even needed?
+  if [ -s /etc/inadyn-mt.conf ]; then
+      echo "There is no inadyn-mt configuration file; exit"
+      return 0
+  fi
+
+  # if TMPDIR is set leave it alone otherwise set
+  [ -z $TMPDIR ] && TMPDIR='/tmp/mkinitcpio-ddns'
+
+  # check if TMPDIR exsists if not make it
+  [ -d $TMPDIR ] || mkdir -p $TMPDIR
+
+  umask 0022
+
+  add_checked_modules "/drivers/net/"
+  add_file /etc/inadyn-mt.con
+  add_binary /usr/bin/inadyn-mt
+
+  add_runscript
+  
+}
+
+help ()
+{
+    cat<<HELPEOF
+This hook is used with the dropbear_initrd_encrypt hooks to provide ddns
+capabilities to the early userspace.
+HELPEOF
+}
+
